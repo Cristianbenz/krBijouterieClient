@@ -1,0 +1,18 @@
+<div class="plant-background">
+  <section class="header-container">
+    <div class="title-container">
+      <h1>Bijouteri acero inoxidable</h1>
+      <input type="search" placeholder="Escribe un nombre" />
+    </div>
+  </section>
+  <section id="categories-section">
+    <ul class="categories-list">
+      <li *ngFor="let category of categories">
+        <a [routerLink]="['/productos/' + category.name.toLocaleLowerCase()]">
+          <category-card [data]="category" />
+        </a>
+      </li>
+    </ul>
+  </section>
+</div>
+<contact />

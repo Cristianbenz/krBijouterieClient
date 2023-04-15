@@ -1,0 +1,7 @@
+<h3>Informacion</h3>
+<form [formGroup]="form" (ngSubmit)="submit()" >
+  <input type="email" name="email" formControlName="email" />
+  <input type="text" name="name" formControlName="name" />
+  <input type="number" name="phone" formControlName="phone" />
+  <textarea name="text" formControlName="text"></textarea>
+</form>
