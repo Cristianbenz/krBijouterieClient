@@ -1,4 +1,23 @@
-<img />
-<h1>Titulo</h1>
-<p>Descripcion</p>
-<span>$Precio</span>
+<back-arrow />
+<div class="layout">
+    <carousel [pictures]="product.pictures" width="400px" height="400px" />
+    <section>
+        <h1>{{product.name}}</h1>
+        <span class="price">${{product.price}}</span>
+        <p>{{product.description}}</p>
+        <p>
+            ¿Estas interesado/a en este producto? Escribinos por algunas de las siguientes opciones, pinchando aqui.
+        </p>
+        <ul class="links-list">
+            <li>
+                <a href="">Whatsapp</a>
+            </li>
+            <li>
+                <a href="">Email</a>
+            </li>
+            <li>
+                <a href="">Instagram</a>
+            </li>
+        </ul>
+    </section>
+</div>

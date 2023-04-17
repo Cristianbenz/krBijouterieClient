@@ -1,16 +1,18 @@
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { FiltersNavComponent } from "src/app/components/filtersNav/filtersNav.component";
 import { ProductCardComponent } from "src/app/components/productCard/productCard.component";
+import { RouterModule, ActivatedRoute } from "@angular/router";
 
 @Component({
   standalone: true,
   selector: 'app-products',
-  imports: [CommonModule, FiltersNavComponent, ProductCardComponent],
+  imports: [CommonModule, RouterModule, FiltersNavComponent, ProductCardComponent],
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.scss']
 })
-export class ProductsComponent {
+export class ProductsComponent implements OnInit {
+  private _category! : string;
   public products = [
     {
       id: 1,
@@ -19,4 +21,12 @@ export class ProductsComponent {
       price: 150
     }
   ]
+
+  constructor(private _route: ActivatedRoute) {}
+
+    ngOnInit(): void {
+        this._route.params.subscribe(params => {
+            this._category = params['category'];
+          });
+    }
 }

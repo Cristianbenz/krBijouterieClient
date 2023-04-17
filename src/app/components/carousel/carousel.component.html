@@ -1,0 +1,15 @@
+<div class="carouselContainer" [ngStyle]="{'width': width, 'height': height}">
+    <div class="carouselButtons" *ngIf="items.length > 1">
+        <fa-icon [icon]="arrowLeft" class="button" (click)="prev()" />
+        <fa-icon [icon]="arrowRight" class="button" (click)="next()" />
+    </div>
+    <div class="content">
+        <ng-container *ngFor="let item of items" >
+            <img src="{{item.picture}}" class="item" [ngStyle]="{'margin-left': item.marginLeft + '%'}"/>
+        </ng-container>
+    </div>
+    <div class="steps">
+        <span *ngFor="let item of items" (click)="setCurrent(item.id)" class="step step__{{currentPosition === item.id && 'active'}}">
+        </span>
+    </div>
+</div>

@@ -1,5 +1,9 @@
-<mat-card class="container">
-  <img src="{{product.picture}}" />
-  <h2>{{product.name}}</h2>
-  <span>${{product.price}}</span>
-</mat-card>
+<a [routerLink]="['detalle/' + product.id]">
+  <mat-card class="container">
+    <img class="card-picture" src="{{product.picture}}" />
+    <div class="card-info">
+      <h2>{{product.name}}</h2>
+      <span>${{product.price}}</span>
+    </div>
+  </mat-card>
+</a>

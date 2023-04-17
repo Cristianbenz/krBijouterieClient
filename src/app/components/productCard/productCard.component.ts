@@ -1,10 +1,11 @@
 import { Component, Input } from "@angular/core";
+import { RouterModule } from "@angular/router";
 import { MatCardModule } from "@angular/material/card";
 
 @Component({
   standalone: true,
   selector: 'product-card',
-  imports: [MatCardModule],
+  imports: [RouterModule, MatCardModule],
   templateUrl: './productCard.component.html',
   styleUrls: ['./productCard.component.scss']
 })
