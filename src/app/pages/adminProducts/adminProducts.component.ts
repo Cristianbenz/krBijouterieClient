@@ -3,10 +3,12 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule, MatPaginator } from '@angular/material/paginator';
 import { MatSortModule } from "@angular/material/sort";
 
+import { ProductActionsComponent } from "src/app/components/productActions/productActions.component";
+
 @Component({
   standalone: true,
   selector: 'app-admin-products',
-  imports: [MatTableModule, MatPaginatorModule, MatSortModule],
+  imports: [MatTableModule, MatPaginatorModule, MatSortModule, ProductActionsComponent],
   templateUrl: './adminProducts.component.html',
   styleUrls: ['./adminProducts.component.scss']
 })

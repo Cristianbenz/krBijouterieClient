@@ -51,3 +51,30 @@ body {
 ul {
   padding-inline-start: 0;
 }
+
+.fileInput {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 210px;
+  height: 40px;
+  cursor: pointer;
+  &>input {
+    opacity: 0;
+  }
+  &::before {
+    border-radius: 10px;
+    content: 'Agregar archivo';
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: map-get($secondary, 500);
+    color: map-get($secondary, contrast, 500);
+  }
+}
