@@ -1,6 +1,9 @@
 <div class="container">
   <h1>Admin products</h1>
   <section class="tableContainer">
+    <button mat-fab (click)="openAddProductForm()">
+      <mat-icon>add</mat-icon>
+    </button>
     <table mat-table [dataSource]="dataSource" matSort>
       <ng-container matColumnDef="name">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</th>
