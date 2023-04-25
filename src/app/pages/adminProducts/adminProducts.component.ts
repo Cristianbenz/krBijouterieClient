@@ -37,7 +37,7 @@ export class AdminProductsComponent implements AfterViewInit {
       price: ['', Validators.required],
       description: ['', Validators.required]
     }),
-    files: [[], Validators.required]
+    files: [new FormData(), Validators.required]
   })
 
   constructor(

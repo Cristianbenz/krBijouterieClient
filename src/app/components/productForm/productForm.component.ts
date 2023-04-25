@@ -20,7 +20,7 @@ export class ProductFormComponent {
   constructor(
     private _dialog : MatDialogRef<ProductFormComponent>,
   ) {
-    const getControl = this.data.productForm.get(['files'])?.value as Array<File>;
+    const getControl = this.data.productForm.get(['files'])?.value as FormData;
     getControl.forEach(value => {
       const reader = new FileReader();
       reader.readAsDataURL(value.valueOf() as Blob);
@@ -43,25 +43,19 @@ export class ProductFormComponent {
     this._dialog.close();
   }
 
-  onImageChange(evt: Event) {
-    const files = (<HTMLInputElement>evt.target).files;
+  onImageChange(evt: any) {
+    const files = evt.files;
     const picturesArray = this.data.productForm.get(['product', 'pictures'])?.value;
-    const filesArray = this.data.productForm.get(['files'])?.value as Array<File>;
+    const filesArray = this.data.productForm.get(['files'])?.value as FormData;
     if(files) {
       const urls: Array<URL> = [];
       for(let i = 0; i < files.length; i++) {
         const reader = new FileReader();
         reader.readAsDataURL(files[i]);
         reader.onload = () => {
-          const OImage = {
-            file: files[i],
-            src: reader.result as string
-          };
-          picturesArray.push({
-            name: OImage.file.name
-          });
-          filesArray.push(OImage.file);
-          urls.push(new URL(OImage.src))
+          picturesArray.push(files[i].name);
+          filesArray.append('image', files[i]);
+          urls.push(new URL(reader.result as string))
           this.images = urls;
         };
       }
