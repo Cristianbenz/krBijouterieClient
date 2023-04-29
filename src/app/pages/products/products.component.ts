@@ -1,11 +1,12 @@
 import { Component, OnInit } from "@angular/core";
 import { CommonModule } from "@angular/common";
-import { RouterModule, ActivatedRoute } from "@angular/router";
+import { RouterModule, ActivatedRoute, Router } from "@angular/router";
 import { MatMenuModule } from "@angular/material/menu";
 import { FiltersNavComponent } from "src/app/components/filtersNav/filtersNav.component";
 import { ProductCardComponent } from "src/app/components/productCard/productCard.component";
 import { ProductService } from "src/app/services/productService";
 import { IProduct } from "src/app/models/product";
+import { map } from "rxjs";
 
 @Component({
   standalone: true,
@@ -15,17 +16,23 @@ import { IProduct } from "src/app/models/product";
   styleUrls: ['./products.component.scss']
 })
 export class ProductsComponent implements OnInit {
-  public category! : string;
+  public category : string = '';
+  public name : string = '';
   public products: Array<IProduct> = []
   private _initFilter = window.sessionStorage.getItem('filters')
-  constructor(private _route: ActivatedRoute, private _productService : ProductService) {}
+  constructor(
+    private _route: ActivatedRoute,
+    private _router: Router,
+    private _productService : ProductService
+  ) {}
 
   ngOnInit(): void {
     const savedFilters = this._initFilter ? JSON.parse(String(this._initFilter)) : null
-    this._route.params.subscribe(params => {
-      this.category = params['category'];
-    });
-    this._productService.getAll(savedFilters || {category: this.category, getDisabled: false})
+    const categoryFromParams = this._route.snapshot.paramMap.get('category');
+    const nameFromParams = this._route.snapshot.paramMap.get('name') || '';
+    this.category = String(categoryFromParams)
+    this.name = String(nameFromParams)
+    this._productService.getAll(savedFilters || {category: categoryFromParams, getDisabled: false, name: nameFromParams})
     .subscribe({
       next: response => {
         if(response.success) {
@@ -37,6 +44,7 @@ export class ProductsComponent implements OnInit {
   }
 
   filterProducts(filters: any) {
+    this.name && this._router.navigate(['productos/todo'])
     this._productService.getAll({getDisabled: false, category: this.category, ...filters})
     .subscribe({
       next: response => {

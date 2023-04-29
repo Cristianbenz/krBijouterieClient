@@ -2,11 +2,12 @@ import { Component } from "@angular/core";
 import { FormBuilder, ReactiveFormsModule, Validators, } from "@angular/forms";
 import { MatDialogModule, MatDialogRef } from "@angular/material/dialog"
 import { MatInputModule } from "@angular/material/input";
+import { MatButtonModule } from "@angular/material/button";
 
 @Component({
   standalone: true,
   selector: 'contact-form',
-  imports: [ReactiveFormsModule, MatDialogModule, MatInputModule],
+  imports: [ReactiveFormsModule, MatDialogModule, MatInputModule, MatButtonModule],
   templateUrl: './contactForm.component.html',
   styleUrls: ['./contactForm.component.scss']
 })
@@ -23,6 +24,6 @@ export class ContactFormComponent {
   ) {}
 
   submit() {
-
+      
   }
 }

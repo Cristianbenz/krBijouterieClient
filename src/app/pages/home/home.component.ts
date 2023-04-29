@@ -1,6 +1,7 @@
 import { Component } from "@angular/core";
 import { CommonModule } from '@angular/common';
-import { RouterModule } from "@angular/router";
+import { Router, RouterModule } from "@angular/router";
+import { FormsModule } from '@angular/forms';
 
 import { CardComponent } from "../../components/categoryCard/categoryCard.component";
 import { ContactComponent } from "src/app/components/contact/contact.component";
@@ -8,11 +9,12 @@ import { ContactComponent } from "src/app/components/contact/contact.component";
 @Component({
   standalone: true,
   selector: 'app-home',
-  imports: [CommonModule, RouterModule, CardComponent, ContactComponent],
+  imports: [CommonModule, RouterModule, CardComponent, ContactComponent, FormsModule],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent {
+  public search = '';
   public categories = [
     {
       picture: 'https://i.pinimg.com/originals/87/95/c6/8795c60c3b49d96d511542f9cf841274.jpg',
@@ -27,4 +29,13 @@ export class HomeComponent {
       name: 'Pulseras'
     }
   ]
+
+  constructor(
+    private _router: Router
+  ) {}
+
+  submit(evt: any) {
+    evt.preventDefault()
+    this._router.navigate(['productos/todos', {name: this.search}])
+  }
 }
