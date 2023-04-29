@@ -1,4 +1,4 @@
-<div class="admin-layout">
+<div class="admin-layout" *ngIf="user">
   <mat-nav-list role="navigation" class="admin-nav">
     <mat-list-item>
       <a [routerLink]="['products']" matListItemTitle class="adminNav-link">
@@ -12,12 +12,23 @@
         <p>Categorias</p>
       </a>
     </mat-list-item>
+    <mat-list-item (click)="signOut()">
+      <mat-icon matListItemIcon></mat-icon>
+      <p matListItemTitle class="adminNav-link">Cerrar Sesion</p>
+    </mat-list-item>
   </mat-nav-list>
   <router-outlet></router-outlet>
 </div>
 
 <h1>Ingreso de Admin</h1>
-<form>
-  <input type="email" name="email" />
-  <input type="password" name="password" />
+<form [formGroup]="authForm" (ngSubmit)="authenticate()">
+  <mat-form-field>
+    <mat-label>Email</mat-label>
+    <input matInput type="email" name="email" formControlName="email" />
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Password</mat-label>
+    <input matInput type="password" name="password" formControlName="password" />
+  </mat-form-field>
+  <button mat-raised-button color="accent">Ingresar</button>
 </form>

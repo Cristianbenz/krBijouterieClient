@@ -1,5 +1,5 @@
-<h1>Nombre de categoria</h1>
-<filters-nav />
+<h1>{{category.toLocaleUpperCase()}}</h1>
+<filters-nav (applyFilters)="filterProducts($event)" />
 <ul class="productsList">
   <li *ngFor="let product of products">
     <product-card [product]="product" />

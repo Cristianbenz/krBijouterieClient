@@ -1,23 +1,31 @@
 import { Injectable } from '@angular/core';
-import { HttpClientModule, HttpClient, HttpHeaders } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable } from "rxjs";
 
 import { environment } from "src/environments/environment";
-import { IProduct } from "../models/product";
 import { IGetAllFilter } from "../models/getAllFilter";
 import { IResponse } from "../models/response";
+import { IProduct } from '../models/product';
+import { UserService } from './userService';
+import { IUser } from '../models/user';
 
 @Injectable({
   providedIn: 'any'
 })
 export class ProductService {
   private readonly _url = environment.apiUrl + "/Products";
-  private readonly _httpOptions = {
-    headers: new HttpHeaders({
+  private _user: IUser | null = null
+  private _httpOptions = {
+    headers: {
       'Content-Type': 'application/json',
-    })
+    }
   }
-  constructor(private _http : HttpClient) {}
+  constructor(
+    private _http : HttpClient,
+    private _userSrevice: UserService
+    ) {
+      this._userSrevice.user.subscribe(info => this._user = info)
+    }
   
   getAll(filters: IGetAllFilter): Observable<IResponse> {
     const {name, category, minPrice, maxPrice, dateOrder, getDisabled} = {
@@ -32,12 +40,55 @@ export class ProductService {
     return this._http.get<IResponse>(`${this._url}?${queryString}`)
   }
 
+  getById(productId: number): Observable<IResponse> {
+    return this._http.get<IResponse>(`${this._url}/${productId}`)
+  }
+
+  uploadImage(productId: number, files: any) {
+    return this._http.post<IResponse>(`${this._url}/uploadImages/${productId}`, files, {
+      headers: {
+        'Authorization': `Bearer ${this._user?.token}`
+      }
+    });
+  }
+
+  deleteImage(productId: number, fileName: string) {
+    const customOptions = {
+      headers: {
+        'Authorization': `Bearer ${this._user?.token}`
+      }
+    }
+    return this._http.delete<IResponse>(`${this._url}/deleteImage/${productId}/${fileName}`, customOptions);
+  }
+
   add(product: any): Observable<IResponse> {
-    console.log(product)
-    return this._http.post<IResponse>(`${this._url}`, product, this._httpOptions);
+    const optionsWithAuth = {
+      headers: {
+        ...this._httpOptions.headers,
+        "Authorization": "Bearer " + this._user?.token
+      }
+    }
+    return this._http.post<IResponse>(`${this._url}`, product, optionsWithAuth);
   }
   
-  update(product: IProduct) {
-    return this._http.put<IResponse>(`${this._url}`, product, this._httpOptions);
+  update(product: any) {
+    const optionsWithAuth = {
+      headers: {
+        ...this._httpOptions.headers,
+        "Authorization": "Bearer " + this._user?.token
+      }
+    }
+    const {id, ...rest} = product as IProduct;
+    return this._http.put<IResponse>(`${this._url}/${id}`, {...rest}, optionsWithAuth);
+  }
+
+  delete(productId: number): Observable<IResponse> {
+    const optionsWithAuth = {
+      headers: {
+        ...this._httpOptions.headers,
+        "Authorization": "Bearer " + this._user?.token
+      }
+    }
+    return this._http.delete<IResponse>(`${this._url}/${productId}`, optionsWithAuth)
   }
 }

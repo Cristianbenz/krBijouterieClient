@@ -1,6 +1,6 @@
 <a [routerLink]="['detalle/' + product.id]">
   <mat-card class="container">
-    <img class="card-picture" src="{{product.picture}}" />
+    <img class="card-picture" src="{{product.pictures[0].src}}" />
     <div class="card-info">
       <h2>{{product.name}}</h2>
       <span>${{product.price}}</span>

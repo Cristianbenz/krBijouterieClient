@@ -1,0 +1,10 @@
+<div class="container">
+  <form [formGroup]="data.categoryForm" (ngSubmit)="data.action()">
+    <mat-form-field>
+      <mat-label>Nombre</mat-label>
+      <input matInput type="text" formControlName="name" />
+    </mat-form-field>
+    <button mat-raised-button color="accent" >Actualizar</button>
+    <button type="button" mat-raised-button (click)="close()">Cancelar</button>
+  </form>
+</div>

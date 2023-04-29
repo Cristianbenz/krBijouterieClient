@@ -1,17 +1,21 @@
 <section id="contact-section" class="section-container">
-  <div class="background-form">
+  <div class="background-form h-4/6 sm:h-5/6">
     <ul class="iconsList">
       <li>
-        <fa-icon [icon]="faInstagram"></fa-icon>
+        <a href="https://www.instagram.com/kioscorodo2/" target="_blank" class="text-7xl sm:text-8xl">
+          <fa-icon [icon]="faInstagram"></fa-icon>
+        </a>
       </li>
       <li>
-        <fa-icon [icon]="faWhatsapp"></fa-icon>
+        <a href="https://wa.me/59895976862?" target="_blank" class="text-7xl sm:text-8xl">
+          <fa-icon [icon]="faWhatsapp"></fa-icon>
+        </a>
       </li>
       <li (click)="openForm()">
-        <fa-icon [icon]="faEnvelope"></fa-icon>
+        <fa-icon [icon]="faEnvelope" class="text-7xl sm:text-8xl"></fa-icon>
       </li>
     </ul>
-    <h2>Contacto</h2>
+    <h2 class="pt-9 sm:pt-20">Contacto</h2>
     <span>No dudes en contactarnos</span>
     <div class="map">
       <google-map-widget />

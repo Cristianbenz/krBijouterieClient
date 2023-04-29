@@ -1,21 +1,21 @@
 <div class="container">
-  <h1>Admin products</h1>
+  <h1>Productos</h1>
   <section class="tableContainer">
     <button mat-fab (click)="openAddProductForm()">
       <mat-icon>add</mat-icon>
     </button>
-    <table mat-table [dataSource]="dataSource" matSort>
+    <table mat-table [dataSource]="productsList" matSort>
       <ng-container matColumnDef="name">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</th>
         <td mat-cell *matCellDef="let product">{{product.name}}</td>
       </ng-container>
       <ng-container matColumnDef="category">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Categoria</th>
-        <td mat-cell *matCellDef="let product">{{product.category}}</td>
+        <td mat-cell *matCellDef="let product">{{product.category.name}}</td>
       </ng-container>
       <ng-container matColumnDef="status">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Estado</th>
-        <td mat-cell *matCellDef="let product">{{product.status}}</td>
+        <td mat-cell *matCellDef="let product">{{product.enabled ? 'visible' : 'oculto'}}</td>
       </ng-container>
       <ng-container matColumnDef="price">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Precio</th>
@@ -23,7 +23,7 @@
       </ng-container>
       <ng-container matColumnDef="actions">
         <th mat-header-cell *matHeaderCellDef>Accion</th>
-        <td mat-cell *matCellDef="let product"><product-actions [product]="product" /></td>
+        <td mat-cell *matCellDef="let product"><product-actions (updateEvent)="getProducts()" [product]="product" /></td>
       </ng-container>
     
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

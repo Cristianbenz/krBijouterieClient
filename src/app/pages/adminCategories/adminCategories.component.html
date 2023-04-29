@@ -1,18 +1,21 @@
 <div class="container">
-  <h1>Admin categories</h1>
+  <h1>Categorias</h1>
   <section class="tableContainer">
-    <table mat-table [dataSource]="dataSource" matSort>
+    <button mat-fab (click)="openAddCategoryForm()">
+      <mat-icon>add</mat-icon>
+    </button>
+    <table mat-table [dataSource]="categoriesList" matSort>
       <ng-container matColumnDef="name">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</th>
         <td mat-cell *matCellDef="let category">{{category.name}}</td>
       </ng-container>
       <ng-container matColumnDef="status">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Estado</th>
-        <td mat-cell *matCellDef="let category">{{category.status}}</td>
+        <td mat-cell *matCellDef="let category">{{category.enabled? 'Visible' : 'Oculta'}}</td>
       </ng-container>
       <ng-container matColumnDef="actions">
         <th mat-header-cell *matHeaderCellDef>Accion</th>
-        <td mat-cell *matCellDef="let category"><button>...</button></td>
+        <td mat-cell *matCellDef="let category"><button [matMenuTriggerFor]="menu" [matMenuTriggerData]="{category}" mat-raised-button color="accent">...</button></td>
       </ng-container>
     
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
@@ -24,3 +27,12 @@
     </mat-paginator>
   </section>
 </div>
+<mat-menu #menu="matMenu">
+  <ng-template matMenuContent let-category="category">
+    <div class="menu">
+      <button mat-button (click)="openUpdateCategoryForm(category)">Editar</button>
+      <button *ngIf="category.enabled" mat-button (click)="disable(category.id)">Ocultar</button>
+      <button *ngIf="!category.enabled" mat-button (click)="enable(category)">Mostrar</button>
+    </div>
+  </ng-template>
+</mat-menu>

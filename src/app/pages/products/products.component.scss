@@ -1,4 +1,8 @@
 .productsList {
     padding: 24px;
     list-style-type: none;
+
+    li {
+        width: max-content;
+    }
 }

@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faArrowAltCircleLeft, faArrowAltCircleRight } from '@fortawesome/free-regular-svg-icons';
+import { IPicture } from 'src/app/models/picture';
 
 @Component({
   standalone: true,
@@ -11,9 +12,7 @@ import { faArrowAltCircleLeft, faArrowAltCircleRight } from '@fortawesome/free-r
   styleUrls: ['./carousel.component.scss'],
 })
 export class CarouselComponent implements OnInit {
-  @Input() width: string = '100%';
-  @Input() height: string = '100%';
-  @Input() pictures: Array<string> = [];
+  @Input() pictures: Array<IPicture> = [];
   public items: Array<{ id: number; picture: string; marginLeft?: number }> = [];
   public currentPosition: number = 0;
   public arrowLeft = faArrowAltCircleLeft;
@@ -24,7 +23,7 @@ export class CarouselComponent implements OnInit {
     for(let picture of this.pictures) {
       this.items.push({
         id: index,
-        picture: picture,
+        picture: picture.src,
         marginLeft: 0
       });
       index ++;

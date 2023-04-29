@@ -1,4 +1,5 @@
 export interface IPicture {
-    file: File;
+    id: number;
+    name: string;
     src: string;
 }

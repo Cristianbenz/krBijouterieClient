@@ -1,0 +1,30 @@
+form {
+  user-select: none;
+
+  &>input {
+    height: 25px;
+    border-radius: 10px;
+    border: 1px solid black;
+    padding: 10px;
+  }
+}
+
+.rangeControlContainer {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.orderControl {
+  display: flex;
+  align-items: center;
+
+  &>.arrow{
+    display: none;
+
+    &.active {
+    display: block;
+    }
+  }
+}

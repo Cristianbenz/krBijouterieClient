@@ -1,9 +1,27 @@
-<nav>
-  <input />
-  <mat-slider min="0" max="800" discrete>
-    <input value="0" matSliderStartThumb>
-    <input value="800" matSliderEndThumb>
-  </mat-slider>
-  <span>Ordenar por precio</span>
-  <span>Ordenar por nombre</span>
+<nav class="pt-4">
+  <span class="px-4 font-bold">Filtros</span>
+  <form class="flex flex-col items-start px-4 lg:flex-row lg:items-center pt-4 gap-2 lg:justify-end flex-wrap" [formGroup]="filtersForm" (ngSubmit)="apply()" >
+    <input formControlName="name" placeholder="Buscar por nombre" />
+    <div class="rangeControlContainer">
+      <span>Rango de precio:</span>
+      <mat-slider min="0" max="800" discrete>
+        <input formControlName="minPrice" value="0" matSliderStartThumb>
+        <input formControlName="maxPrice" value="800" matSliderEndThumb>
+      </mat-slider>
+    </div>
+    <div class="orderControl">
+      <span (click)="orderByPrice()">Orden por precio</span>
+      <mat-icon class="arrow {{price === 'DESC' && 'active'}}">keyboard_arrow_down</mat-icon>
+      <mat-icon class="arrow {{price === 'ASC' && 'active'}}">keyboard_arrow_up</mat-icon>
+    </div>
+    <div class="orderControl">
+      <span (click)="orderByDate()">Orden por fecha</span>
+      <mat-icon class="arrow {{date === 'DESC' && 'active'}}">keyboard_arrow_down</mat-icon>
+      <mat-icon class="arrow {{date === 'ASC' && 'active'}}">keyboard_arrow_up</mat-icon>
+    </div>
+    <div class="flex gap-2">
+      <button (click)="clear()" type="button" mat-raised-button>Limpiar</button>
+      <button mat-raised-button color="accent">Aplicar</button>
+    </div>
+  </form>
 </nav>

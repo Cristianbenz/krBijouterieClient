@@ -1,6 +1,7 @@
 import { Component, Input } from "@angular/core";
 import { RouterModule } from "@angular/router";
 import { MatCardModule } from "@angular/material/card";
+import { IProduct } from "src/app/models/product";
 
 @Component({
   standalone: true,
@@ -10,5 +11,5 @@ import { MatCardModule } from "@angular/material/card";
   styleUrls: ['./productCard.component.scss']
 })
 export class ProductCardComponent {
-  @Input() product! : {id: number; name: string; picture: string; price: number}
+  @Input() product! : IProduct
 }

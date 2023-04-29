@@ -5,13 +5,15 @@ import { importProvidersFrom } from '@angular/core';
 import { provideRouter } from '@angular/router';
 
 import { routes } from './app/app-routing.module';
-import { provideHttpClient } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, provideHttpClient } from '@angular/common/http';
+import { JwtInterceptor } from './app/security/jwtIterceptor';
 
 bootstrapApplication(AppComponent, {
     providers: [
         provideHttpClient(),
         importProvidersFrom(BrowserAnimationsModule),
-        provideRouter(routes)
+        provideRouter(routes),
+        { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     ]
 })
 .catch(error => console.error(error));

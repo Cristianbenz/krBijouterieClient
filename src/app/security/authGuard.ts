@@ -1,7 +1,9 @@
-import { ActivatedRouteSnapshot, CanActivate, Router } from "@angular/router";
+import { Router } from "@angular/router";
 import { UserService } from "../services/userService";
+import { Injectable } from "@angular/core";
 
-export class AuthGuard implements CanActivate {
+@Injectable()
+export class AuthGuard {
   constructor(
       private _router: Router,
       private _userService: UserService
@@ -9,8 +11,7 @@ export class AuthGuard implements CanActivate {
 
   canActivate() {
       if (this._userService.userData) return true;
-      
-      this._router.navigate(['']);
+      this._router.navigate(['admin']);
       return false;
   }
 }

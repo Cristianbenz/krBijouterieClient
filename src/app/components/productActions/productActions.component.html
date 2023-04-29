@@ -2,6 +2,7 @@
 <mat-menu #menu="matMenu">
   <div class="menu">
     <button mat-button (click)="openProductForm()">Editar</button>
-    <button mat-button>Ocultar</button>
+    <button *ngIf="product.enabled" mat-button (click)="disable()">Ocultar</button>
+    <button *ngIf="!product.enabled" mat-button (click)="enable()">Mostrar</button>
   </div>
 </mat-menu>
