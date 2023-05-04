@@ -5,13 +5,13 @@ import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { faInstagram, faWhatsapp  } from "@fortawesome/free-brands-svg-icons";
 import { faEnvelope } from "@fortawesome/free-regular-svg-icons";
 
-import { GoogleMapComponent } from "../map/googleMap.component";
+import { MapComponent } from "../map/map.component";
 import { ContactFormComponent } from "../contactForm/contactForm.component";
 
 @Component({
   standalone: true,
   selector: 'contact',
-  imports: [GoogleMapComponent, MatDialogModule, MatIconModule, FontAwesomeModule],
+  imports: [MapComponent, MatDialogModule, MatIconModule, FontAwesomeModule],
   templateUrl: './contact.component.html',
   styleUrls: ['./contact.component.scss']
 })

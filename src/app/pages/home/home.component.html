@@ -1,8 +1,8 @@
 <div class="plant-background">
-  <section class="header-container">
-    <div class="title-container flex flex-col items-center sm:justify-center md:w-max h-4/6 sm:h-5/6 gap-8 px-20">
-      <h1 class="text-6xl sm:text-center pt-40 sm:pt-20">Bijouteri acero inoxidable</h1>
-      <form (submit)="submit($event)">
+  <section class="h-[92vh] flex items-end md:justify-center">
+    <div class="title-container w-full flex flex-col justify-end items-center sm:justify-center md:w-max h-4/6 sm:h-5/6 gap-8 px-20">
+      <h1 class="text-6xl sm:text-center">Bijouteri acero inoxidable</h1>
+      <form (submit)="submit($event)" class="w-full">
         <input [(ngModel)]="search" name="search" class="h-14 md:h-16 p-2 mb-8 sm:mb-0" type="search" placeholder="Escribe un nombre" />
       </form>
     </div>
