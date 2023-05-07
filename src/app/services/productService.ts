@@ -28,15 +28,16 @@ export class ProductService {
     }
   
   getAll(filters: IGetAllFilter): Observable<IResponse> {
-    const {name, category, minPrice, maxPrice, dateOrder, getDisabled} = {
+    const {name, category, minPrice, maxPrice, dateOrder, getDisabled, priceOrder} = {
       name: filters.name ? `name=${filters.name}` : '',
       category: filters.category ? `&category=${filters.category}` : '',
       minPrice: filters.minPrice ? `&minPrice=${filters.minPrice}`  : '',
       maxPrice: filters.maxPrice ? `&maxPrice=${filters.maxPrice}`  : '',
       dateOrder: filters.dateOrder ? `&dateOrder=${filters.dateOrder}` : '',
+      priceOrder: filters.priceOrder ? `&priceOrder=${filters.priceOrder}` : '',
       getDisabled: filters.getDisabled ? `&getDisabled=${filters.getDisabled}`  : ''
     }
-    const queryString = `${name}${category}${minPrice}${maxPrice}${dateOrder}${getDisabled}`
+    const queryString = `${name}${category}${minPrice}${maxPrice}${getDisabled}${dateOrder}${priceOrder}`
     return this._http.get<IResponse>(`${this._url}?${queryString}`)
   }
 

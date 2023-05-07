@@ -4,5 +4,6 @@ export interface IGetAllFilter {
     minPrice?: number;
     maxPrice?: number;
     dateOrder?: 'ASC' | 'DESC';
+    priceOrder?: 'ASC' | 'DESC';
     getDisabled?: boolean;
 }

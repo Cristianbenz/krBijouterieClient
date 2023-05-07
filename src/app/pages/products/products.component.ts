@@ -6,7 +6,6 @@ import { FiltersNavComponent } from "src/app/components/filtersNav/filtersNav.co
 import { ProductCardComponent } from "src/app/components/productCard/productCard.component";
 import { ProductService } from "src/app/services/productService";
 import { IProduct } from "src/app/models/product";
-import { map } from "rxjs";
 
 @Component({
   standalone: true,
@@ -32,7 +31,8 @@ export class ProductsComponent implements OnInit {
     const nameFromParams = this._route.snapshot.paramMap.get('name') || '';
     this.category = String(categoryFromParams)
     this.name = String(nameFromParams)
-    this._productService.getAll(savedFilters || {category: categoryFromParams, getDisabled: false, name: nameFromParams})
+
+    this._productService.getAll(savedFilters? {...savedFilters, category: categoryFromParams, getDisabled: false, name: nameFromParams} : {category: categoryFromParams, getDisabled: false, name: nameFromParams})
     .subscribe({
       next: response => {
         if(response.success) {
