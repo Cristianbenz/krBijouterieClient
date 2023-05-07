@@ -23,8 +23,8 @@ export class CategoryService {
     this._userSrevice.user.subscribe(info => this._user = info)
   }
 
-  getAll(): Observable<IResponse> {
-    return this._http.get<IResponse>(`${this._url}`)
+  getAll(disabled: boolean): Observable<IResponse> {
+    return this._http.get<IResponse>(`${this._url}?getDisabled=${disabled}`)
   }
 
   add(category: any): Observable<IResponse> {

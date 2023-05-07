@@ -1,10 +1,12 @@
-import { Component } from "@angular/core";
+import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from "@angular/router";
 import { FormsModule } from '@angular/forms';
 
 import { CardComponent } from "../../components/categoryCard/categoryCard.component";
 import { ContactComponent } from "src/app/components/contact/contact.component";
+import { CategoryService } from "src/app/services/categoryService";
+import { ICategory } from "src/app/models/category";
 
 @Component({
   standalone: true,
@@ -13,26 +15,20 @@ import { ContactComponent } from "src/app/components/contact/contact.component";
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
+  @ViewChild('categoriesSection') categoriesSection!: ElementRef;
   public search = '';
-  public categories = [
-    {
-      picture: 'https://i.pinimg.com/originals/87/95/c6/8795c60c3b49d96d511542f9cf841274.jpg',
-      name: 'Collares'
-    },
-    {
-      picture: 'https://i.pinimg.com/564x/13/10/66/1310668be1945efc128a8f0cddf4c8df.jpg',
-      name: 'Caravanas'
-    },
-    {
-      picture: 'https://i.pinimg.com/736x/99/1e/f8/991ef8c49a37e08f1994f625e66384e1.jpg',
-      name: 'Pulseras'
-    }
-  ]
+  public categories: Array<ICategory> = []
 
   constructor(
-    private _router: Router
-  ) {}
+    private _router: Router,
+    private _categoryService: CategoryService
+  ) { }
+
+  ngOnInit(): void {
+    this._categoryService.getAll(false)
+    .subscribe(response => this.categories = response.data)
+  }
 
   submit(evt: any) {
     evt.preventDefault()

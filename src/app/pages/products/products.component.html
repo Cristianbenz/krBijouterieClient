@@ -1,7 +1,7 @@
 <h1>{{category.toLocaleUpperCase()}}</h1>
 <filters-nav (applyFilters)="filterProducts($event)" />
-<ul class="productsList">
-  <li *ngFor="let product of products">
+<ul class="productsList w-5/6 sm:mx-auto py-6 px-2 sm:p-6 gap-y-4 grid grid-cols-[repeat(auto-fit,_minmax(300px,_1fr))] items-center">
+  <li class="w-max justify-self-center" *ngFor="let product of products">
     <product-card [product]="product" />
   </li>
 </ul>

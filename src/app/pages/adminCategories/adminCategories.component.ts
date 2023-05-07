@@ -43,7 +43,7 @@ export class AdminCategoriesComponent implements OnInit, AfterViewInit {
   }
 
   getCategories() {
-    this._categoryService.getAll()
+    this._categoryService.getAll(true)
     .subscribe({
       next: response => {
         if(response.success) {
