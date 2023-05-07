@@ -9,5 +9,4 @@ import { RouterModule } from "@angular/router";
   styleUrls: ['./navBar.component.scss']
 })
 export class NavBarComponent {
-
 }

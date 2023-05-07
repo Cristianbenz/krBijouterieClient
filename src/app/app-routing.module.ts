@@ -5,7 +5,11 @@ import { CategoryService } from './services/categoryService';
 
 export const routes: Routes = [
   {path: '', redirectTo: 'home', pathMatch: 'full'},
-  {path: 'home', loadComponent: () => import('./pages/home/home.component').then(mod => mod.HomeComponent)},
+  {
+    path: 'home',
+    loadComponent: () => import('./pages/home/home.component').then(mod => mod.HomeComponent),
+    providers: [CategoryService, UserService]
+  },
   {
     path: 'productos',
     loadChildren: () => import('./routes/product.routes'),

@@ -7,32 +7,15 @@
   background-position: center bottom;
 }
 
-.header-container {
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
-  height: 91vh;
-}
-
 .title-container {
   position: relative;
-  border-top-right-radius: 100%;
-  border-top-left-radius: 100%;
-  overflow: hidden;
-
-  h1 {
-    
-    font-weight: 400;
-  }
-
   input {
     width: 100%;
     border: 1px solid map-get($secondary, 500);
     border-radius: 15px;
   }
-
-  h1, input {
-    z-index: 3;
+  h1, form {
+    z-index: 30;
   }
 }
 
@@ -45,6 +28,8 @@
   content: "";
   background-color: map-get($surface, 500);
   opacity: .2;
+  border-top-right-radius: 100%;
+  border-top-left-radius: 100%;
 }
 
 #categories-section {
