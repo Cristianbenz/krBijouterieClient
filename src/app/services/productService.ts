@@ -69,6 +69,7 @@ export class ProductService {
         "Authorization": "Bearer " + this._user?.token
       }
     }
+    console.log(product)
     return this._http.post<IResponse>(`${this._url}`, product, optionsWithAuth);
   }
   

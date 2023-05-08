@@ -1,4 +1,4 @@
-<nav class="pt-4">
+<nav class="flex flex-col lg:items-end pt-4">
   <span class="px-4 font-bold">Filtros</span>
   <form class="flex flex-col items-start px-4 lg:flex-row lg:items-center pt-4 gap-2 lg:justify-end flex-wrap" [formGroup]="filtersForm" (ngSubmit)="apply()" >
     <input formControlName="name" placeholder="Buscar por nombre" />
