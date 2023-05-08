@@ -7,7 +7,7 @@
       </form>
     </div>
   </section>
-  <section id="categoriesSection" class=" w-full flex justify-center items-center p-9">
+  <section id="products" class=" w-full flex justify-center items-center p-9">
     <ul class="categories-list m-auto w-max flex justify-center flex-1 flex-wrap gap-3">
       <li *ngFor="let category of categories">
         <a [routerLink]="['/productos/' + category.name.toLocaleLowerCase()]">
@@ -17,4 +17,4 @@
     </ul>
   </section>
 </div>
-<contact />
+<contact id="contact" />
