@@ -8,6 +8,7 @@ export const routes: Routes = [
   {
     path: 'home',
     loadComponent: () => import('./pages/home/home.component').then(mod => mod.HomeComponent),
+    title: 'KrBijouterie - Home',
     providers: [CategoryService, UserService]
   },
   {
@@ -18,6 +19,7 @@ export const routes: Routes = [
   {
     path: 'admin',
     loadChildren: () => import('./routes/admin.routes'),
+    title: 'KrBijouterie - Admin',
     providers: [ProductService, UserService, CategoryService]
   },
   {path: '**', loadComponent: () => import('./pages/notFound/notFound.component').then(mod => mod.NotFoundComponent)}
