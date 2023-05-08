@@ -32,7 +32,7 @@ export class AdminProductsComponent implements OnInit, AfterViewInit {
       price: ['', Validators.required],
       description: ['', Validators.required]
     }),
-    files: [new FormData(), Validators.required]
+    addedImages: [[], Validators.required]
   })
   
   constructor(
@@ -70,17 +70,11 @@ export class AdminProductsComponent implements OnInit, AfterViewInit {
   }
 
   uploadProduct() {
-    this._productService.add(this.productForm.controls.product.value)
+    this._productService.add({...this.productForm.controls.product.value, addedImages: this.productForm.controls.addedImages.value})
     .subscribe({
       next: response => {
         if(response.success) {
           this._dialogRef.closeAll()
-          this._productService.uploadImage(response.data.id, this.productForm.controls.files.value)
-          .subscribe({
-            next: response => {
-              if(response.success) this.getProducts();
-            }
-          })
         }
       },
       error: error => {

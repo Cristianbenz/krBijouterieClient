@@ -4,7 +4,7 @@
 // Plus imports for other components in your app.
 @import './styles/palettes';
 @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;700&display=swap');
-@import url("../node_modules/leaflet/dist/leaflet.css");
+@import url("https://unpkg.com/leaflet@1.9.3/dist/leaflet.css");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

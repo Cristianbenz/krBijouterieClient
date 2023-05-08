@@ -13,12 +13,13 @@
         <mat-label>Nombre</mat-label>
         <input matInput type="text" formControlName="name" />
       </mat-form-field>
-      <div>
-        <label>Fotos</label>
-        <div class="fileInput" >
-          <input type="file" multiple (change)="onImageChange($event)" formArrayName="pictures" />
-        </div>
-      </div>
+      <mat-form-field>
+        <mat-label>Fotos</mat-label>
+        <fieldset class="flex items-center gap-2">
+          <input matInput type="text" [value]="imageInput" (change)="onImageChange($event)" />
+          <button type="button" (click)="addImage()">Agregar</button>
+        </fieldset>
+      </mat-form-field>
       <mat-form-field>
         <mat-label>Precio</mat-label>
         <input matInput type="number" formControlName="price" />
