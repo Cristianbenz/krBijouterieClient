@@ -6,15 +6,17 @@ import { FiltersNavComponent } from "src/app/components/filtersNav/filtersNav.co
 import { ProductCardComponent } from "src/app/components/productCard/productCard.component";
 import { ProductService } from "src/app/services/productService";
 import { IProduct } from "src/app/models/product";
+import { LoaderComponent } from "src/app/components/loader/loader.component";
 
 @Component({
   standalone: true,
   selector: 'app-products',
-  imports: [CommonModule, RouterModule, FiltersNavComponent, ProductCardComponent, MatMenuModule],
+  imports: [CommonModule, RouterModule, FiltersNavComponent, ProductCardComponent, MatMenuModule, LoaderComponent],
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.scss']
 })
 export class ProductsComponent implements OnInit {
+  public loading: boolean = true;
   public category : string = '';
   public name : string = '';
   public products: Array<IProduct> = []
@@ -38,12 +40,18 @@ export class ProductsComponent implements OnInit {
         if(response.success) {
           this.products = response.data;
         }
+        this.finishLoading()
       },
-      error: error => console.log(error)
+      error: error => {
+        if(error.status === 404) {
+          this.finishLoading()
+        }
+      }
     })
   }
 
   filterProducts(filters: any) {
+    this.loading = true
     this.name && this._router.navigate(['productos/todo'])
     this._productService.getAll({getDisabled: false, category: this.category, ...filters})
     .subscribe({
@@ -51,10 +59,20 @@ export class ProductsComponent implements OnInit {
         if(response.success) {
           this.products = response.data
         }
+        this.finishLoading()
       },
-      error: () => {
-        this.products = []
+      error: (error) => {
+        if(error.status === 404) {
+          this.products = []
+          this.finishLoading()
+        }
       }
     })
+  }
+
+  finishLoading() {
+    setTimeout(() => {
+      this.loading = false
+    }, 2000)
   }
 }

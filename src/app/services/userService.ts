@@ -5,7 +5,9 @@ import { IUser } from "../models/user";
 import { environment } from "src/environments/environment";
 import { IResponse } from "../models/response";
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class UserService {
   private readonly _url = environment.apiUrl + "/User";
   private _httpOptions = {
@@ -23,6 +25,7 @@ export class UserService {
     const USER = initUserValue ? JSON.parse(initUserValue) : null;
     this._userSubject = new BehaviorSubject<IUser | null>(USER);
     this.user = this._userSubject.asObservable();
+    this.user.subscribe(user => console.log(user))
   }
 
   public get userData() {

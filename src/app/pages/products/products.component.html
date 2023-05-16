@@ -1,7 +1,13 @@
-<h1 class="p-6 text-2xl font-bolder">{{category.toLocaleUpperCase()}}</h1>
-<filters-nav (applyFilters)="filterProducts($event)" />
-<ul class="productsList w-5/6 mx-auto py-6 sm:p-6 gap-y-4 grid grid-cols-[repeat(auto-fit,_minmax(300px,_1fr))] items-center">
-  <li class="w-max justify-self-center" *ngFor="let product of products">
-    <product-card [product]="product" />
-  </li>
-</ul>
+<app-loader *ngIf="loading" />
+<ng-container *ngIf="!loading">
+  <h1 class="p-6 text-2xl font-bolder">{{category.toLocaleUpperCase()}}</h1>
+  <filters-nav (applyFilters)="filterProducts($event)" />
+  <article *ngIf="!products.length && !loading" class="w-full h-full flex items-center text-center">
+    <p class="text-4xl">No se encontraron articulos</p>
+  </article>
+  <ul *ngIf="products.length" class="productsList min-h-[70vh] w-5/6 mx-auto py-6 sm:p-6 gap-y-4 grid grid-cols-[repeat(auto-fit,_minmax(300px,_1fr))] items-center">
+    <li class="w-max justify-self-center" *ngFor="let product of products">
+      <product-card [product]="product" />
+    </li>
+  </ul>
+</ng-container>
