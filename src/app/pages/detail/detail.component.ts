@@ -8,15 +8,17 @@ import { faArrowAltCircleLeft } from "@fortawesome/free-regular-svg-icons";
 import { BackArrowComponent } from "src/app/components/backArrow/backArrow.component";
 import { IProduct } from "src/app/models/product";
 import { ProductService } from "src/app/services/productService";
+import { LoaderComponent } from "src/app/components/loader/loader.component";
 
 @Component({
   standalone: true,
   selector: 'app-detail',
-  imports: [RouterModule, CommonModule, CarouselComponent, FontAwesomeModule, BackArrowComponent],
+  imports: [RouterModule, CommonModule, CarouselComponent, FontAwesomeModule, BackArrowComponent, LoaderComponent],
   templateUrl: './detail.component.html',
   styleUrls: ['./detail.component.scss']
 })
 export class DetailComponent implements OnInit {
+  public loading: boolean = true;
   public backArrow = faArrowAltCircleLeft;
   private _productId!: number;
   public product!: IProduct;
@@ -38,9 +40,14 @@ export class DetailComponent implements OnInit {
             if(response.success) {
               this.product = response.data
             }
+            this.finishLoading()
           }
         })
     }
 
-
+    finishLoading() {
+      setTimeout(() => {
+        this.loading = false
+      }, 2000)
+    }
 }

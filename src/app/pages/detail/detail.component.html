@@ -1,25 +1,31 @@
-<back-arrow />
-<div class="flex flex-col md:flex-row h-full px-6 md:px-8 gap-8" *ngIf="product">
-    <div class="mx-auto md:mx-0">
-        <carousel [pictures]="product.pictures" />
+<app-loader *ngIf="loading" />
+<ng-container *ngIf="!loading">
+    <back-arrow />
+    <article *ngIf="!product" class="w-full h-full flex items-center text-center">
+        <p class="text-4xl">Este articulo no existe</p>
+    </article>
+    <div class="flex flex-col md:flex-row h-full px-6 md:px-8 gap-8" *ngIf="product">
+        <div class="mx-auto md:mx-0">
+            <carousel [pictures]="product.pictures" />
+        </div>
+        <section class="flex flex-col gap-2 text-lg pb-6">
+            <h1 class="text-4xl font-bold ">{{product.name}}</h1>
+            <span class="price">${{product.price}}</span>
+            <p class="pt-2 ">{{product.description}}</p>
+            <p>
+                ¿Estas interesado/a en este producto? Escribinos por algunas de las siguientes opciones, clickeando alguna de nuestras redes.
+            </p>
+            <ul class="links-list">
+                <li class="border border-solid border-black border-dashed px-2 py-1">
+                    <a href="https://wa.me/59895976862?text={{text}}{{product.name}}{{location}}" target="_blank">Whatsapp</a>
+                </li>
+                <li class="border border-solid border-black border-dashed px-2 py-1">
+                    <a href="" target="_blank">Email</a>
+                </li>
+                <li class="border border-solid border-black border-dashed px-2 py-1">
+                    <a href="https://www.instagram.com/kioscorodo2/" target="_blank">Instagram</a>
+                </li>
+            </ul>
+        </section>
     </div>
-    <section class="flex flex-col gap-2 text-lg pb-6">
-        <h1 class="text-4xl font-bold ">{{product.name}}</h1>
-        <span class="price">${{product.price}}</span>
-        <p class="pt-2 ">{{product.description}}</p>
-        <p>
-            ¿Estas interesado/a en este producto? Escribinos por algunas de las siguientes opciones, clickeando alguna de nuestras redes.
-        </p>
-        <ul class="links-list">
-            <li class="border border-solid border-black border-dashed px-2 py-1">
-                <a href="https://wa.me/59895976862?text={{text}}{{product.name}}{{location}}" target="_blank">Whatsapp</a>
-            </li>
-            <li class="border border-solid border-black border-dashed px-2 py-1">
-                <a href="" target="_blank">Email</a>
-            </li>
-            <li class="border border-solid border-black border-dashed px-2 py-1">
-                <a href="https://www.instagram.com/kioscorodo2/" target="_blank">Instagram</a>
-            </li>
-        </ul>
-    </section>
-</div>
+</ng-container>
