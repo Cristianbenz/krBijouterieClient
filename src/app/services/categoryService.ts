@@ -7,7 +7,7 @@ import { ICategory } from "../models/category";
 
 @Injectable()
 export class CategoryService {
-  private readonly _url = environment.apiUrl + "/Category";
+  private readonly _url = environment.apiUrl + "/category";
   private _httpOptions = {
     headers: {
       'Content-Type': 'application/json'

@@ -11,7 +11,7 @@ import { IProduct } from '../models/product';
   providedIn: 'any'
 })
 export class ProductService {
-  private readonly _url = environment.apiUrl + "/Products";
+  private readonly _url = environment.apiUrl + "/product";
   private _httpOptions = {
     headers: {
       'Content-Type': 'application/json',

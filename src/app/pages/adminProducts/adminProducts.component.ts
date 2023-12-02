@@ -27,12 +27,11 @@ export class AdminProductsComponent implements OnInit, AfterViewInit {
   private productForm = this._formBuilder.group({
     product: this._formBuilder.group({
       name: ['', Validators.required],
-      pictures: [[], Validators.required],
-      categoryId: ['', Validators.required],
+      categoryName: ['', Validators.required],
       price: ['', Validators.required],
       description: ['', Validators.required]
     }),
-    addedImages: [[], Validators.required]
+    pictures: [[], Validators.required]
   })
   
   constructor(
@@ -70,7 +69,7 @@ export class AdminProductsComponent implements OnInit, AfterViewInit {
   }
 
   uploadProduct() {
-    this._productService.add({...this.productForm.controls.product.value, addedImages: this.productForm.controls.addedImages.value})
+    this._productService.add({...this.productForm.controls.product.value, pictures: this.productForm.controls.pictures.value})
     .subscribe({
       next: response => {
         if(response.success) {

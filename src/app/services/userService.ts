@@ -9,7 +9,7 @@ import { IResponse } from "../models/response";
   providedIn: 'root'
 })
 export class UserService {
-  private readonly _url = environment.apiUrl + "/User";
+  private readonly _url = environment.apiAuthUrl + "/login";
   private _httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
@@ -37,7 +37,7 @@ export class UserService {
   }
 
   authenticate(credentials: any): Observable<IResponse> {
-    return this._http.post<IResponse>(`${this._url}/signIn`, credentials, this._httpOptions)
+    return this._http.post<IResponse>(`${this._url}/login`, credentials, this._httpOptions)
     .pipe(
       map(request => {
         if(request.success) {
