@@ -51,7 +51,7 @@ export class ProductService {
   
   update(product: any) {
     const {id, ...rest} = product as IProduct;
-    return this._http.put<IResponse>(`${this._url}/${id}`, {...rest}, this._httpOptions);
+    return this._http.patch<IResponse>(`${this._url}/${id}`, {...rest}, this._httpOptions);
   }
 
   delete(productId: number): Observable<IResponse> {

@@ -12,7 +12,7 @@ import { IPicture } from 'src/app/models/picture';
   styleUrls: ['./carousel.component.scss'],
 })
 export class CarouselComponent implements OnInit {
-  @Input() pictures: Array<IPicture> = [];
+  @Input() pictures: Array<string> = [];
   public items: Array<{ id: number; picture: string; marginLeft?: number }> = [];
   public currentPosition: number = 0;
   public arrowLeft = faArrowAltCircleLeft;
@@ -23,7 +23,7 @@ export class CarouselComponent implements OnInit {
     for(let picture of this.pictures) {
       this.items.push({
         id: index,
-        picture: picture.src,
+        picture: picture,
         marginLeft: 0
       });
       index ++;

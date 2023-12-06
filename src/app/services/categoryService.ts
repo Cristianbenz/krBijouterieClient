@@ -27,7 +27,7 @@ export class CategoryService {
 
   update(category: any): Observable<IResponse> {
     const {id, ...rest} = category as ICategory;
-    return this._http.put<IResponse>(`${this._url}/${id}`, {...rest}, this._httpOptions)
+    return this._http.patch<IResponse>(`${this._url}/${id}`, {...rest}, this._httpOptions)
   }
 
   delete(categoryId: number): Observable<IResponse> {

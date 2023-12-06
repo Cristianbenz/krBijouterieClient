@@ -8,7 +8,7 @@
     </ul>
   </section>
   <form [formGroup]="data.productForm" (ngSubmit)="data.action()">
-    <ng-container formGroupName="product">
+    <ng-container>
       <mat-form-field>
         <mat-label>Nombre</mat-label>
         <input matInput type="text" formControlName="name" />
