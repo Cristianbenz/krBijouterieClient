@@ -43,7 +43,7 @@ export class ProductFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this._categoryService.getAll(false)
+    this._categoryService.getAll(true)
     .subscribe(response => {
       if(response.success && response.data.length) {
         this.categories = response.data

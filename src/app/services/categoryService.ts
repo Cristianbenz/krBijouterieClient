@@ -17,8 +17,8 @@ export class CategoryService {
     private _http : HttpClient
   ) { }
 
-  getAll(disabled: boolean): Observable<IResponse> {
-    return this._http.get<IResponse>(`${this._url}?getDisabled=${disabled}`)
+  getAll(enabled?: boolean): Observable<IResponse> {
+    return this._http.post<IResponse>(`${this._url}/all`, {enabled}, this._httpOptions)
   }
 
   add(category: any): Observable<IResponse> {

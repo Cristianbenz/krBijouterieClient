@@ -26,7 +26,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
   ) { }
   
   ngOnInit(): void {
-    this._categoryService.getAll(false)
+    this._categoryService.getAll(true)
     .subscribe(response => this.categories = response.data)
   }
 

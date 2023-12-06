@@ -49,7 +49,7 @@ export class AdminProductsComponent implements OnInit, AfterViewInit {
   }
 
   getProducts() {
-    this._productService.getAll({getDisabled: true})
+    this._productService.getAll()
     .subscribe({
       next: response => {
         if(response.success) {
