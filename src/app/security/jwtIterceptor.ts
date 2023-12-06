@@ -6,7 +6,6 @@ export const JwtInterceptor: HttpInterceptorFn = (req, next) => {
   const userService = inject(UserService);
 
   userService.user.subscribe(data => {
-    console.log(data)
     if(data) {
       req = req.clone({
         setHeaders: {

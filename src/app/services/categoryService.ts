@@ -7,7 +7,7 @@ import { ICategory } from "../models/category";
 
 @Injectable()
 export class CategoryService {
-  private readonly _url = environment.apiUrl + "/Category";
+  private readonly _url = environment.apiUrl + "/category";
   private _httpOptions = {
     headers: {
       'Content-Type': 'application/json'
@@ -17,8 +17,8 @@ export class CategoryService {
     private _http : HttpClient
   ) { }
 
-  getAll(disabled: boolean): Observable<IResponse> {
-    return this._http.get<IResponse>(`${this._url}?getDisabled=${disabled}`)
+  getAll(enabled?: boolean): Observable<IResponse> {
+    return this._http.post<IResponse>(`${this._url}/all`, {enabled}, this._httpOptions)
   }
 
   add(category: any): Observable<IResponse> {
@@ -27,7 +27,7 @@ export class CategoryService {
 
   update(category: any): Observable<IResponse> {
     const {id, ...rest} = category as ICategory;
-    return this._http.put<IResponse>(`${this._url}/${id}`, {...rest}, this._httpOptions)
+    return this._http.patch<IResponse>(`${this._url}/${id}`, {...rest}, this._httpOptions)
   }
 
   delete(categoryId: number): Observable<IResponse> {

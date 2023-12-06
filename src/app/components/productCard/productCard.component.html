@@ -1,6 +1,6 @@
 <a [routerLink]="['detalle/' + product.id]">
   <mat-card class="w-[300px]">
-    <img class="w-full h-[350px]" src="{{product.pictures[0].src}}" />
+    <img class="w-full h-[350px]" src="{{product.pictures[0]}}" />
     <div class="flex flex-col items-center p-3 text-accent">
       <h2>{{product.name}}</h2>
       <span>${{product.price}}</span>

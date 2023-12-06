@@ -4,12 +4,13 @@ import { BehaviorSubject, Observable, map } from "rxjs";
 import { IUser } from "../models/user";
 import { environment } from "src/environments/environment";
 import { IResponse } from "../models/response";
+import { AuthResponse } from "../models/authResponse";
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-  private readonly _url = environment.apiUrl + "/User";
+  private readonly _url = environment.apiAuthUrl;
   private _httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
@@ -25,7 +26,6 @@ export class UserService {
     const USER = initUserValue ? JSON.parse(initUserValue) : null;
     this._userSubject = new BehaviorSubject<IUser | null>(USER);
     this.user = this._userSubject.asObservable();
-    this.user.subscribe(user => console.log(user))
   }
 
   public get userData() {
@@ -36,13 +36,14 @@ export class UserService {
 
   }
 
-  authenticate(credentials: any): Observable<IResponse> {
-    return this._http.post<IResponse>(`${this._url}/signIn`, credentials, this._httpOptions)
+  authenticate(credentials: any): Observable<AuthResponse> {
+    return this._http.post<AuthResponse>(`${this._url}/login`, credentials, this._httpOptions)
     .pipe(
       map(request => {
-        if(request.success) {
-          this._userSubject.next(request.data);
-          window.localStorage.setItem('user', JSON.stringify(request.data));
+        if(request.token) {
+          const nUser = {name: "admin", token: request.token}
+          this._userSubject.next(nUser);
+          window.localStorage.setItem('user', JSON.stringify(nUser));
         }
         return request;
       })

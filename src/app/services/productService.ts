@@ -11,7 +11,7 @@ import { IProduct } from '../models/product';
   providedIn: 'any'
 })
 export class ProductService {
-  private readonly _url = environment.apiUrl + "/Products";
+  private readonly _url = environment.apiUrl + "/product";
   private _httpOptions = {
     headers: {
       'Content-Type': 'application/json',
@@ -21,18 +21,16 @@ export class ProductService {
     private _http : HttpClient
     ) { }
   
-  getAll(filters: IGetAllFilter): Observable<IResponse> {
-    const {name, category, minPrice, maxPrice, dateOrder, getDisabled, priceOrder} = {
-      name: filters.name ? `name=${filters.name}` : '',
-      category: filters.category ? `&category=${filters.category}` : '',
-      minPrice: filters.minPrice ? `&minPrice=${filters.minPrice}`  : '',
-      maxPrice: filters.maxPrice ? `&maxPrice=${filters.maxPrice}`  : '',
-      dateOrder: filters.dateOrder ? `&dateOrder=${filters.dateOrder}` : '',
-      priceOrder: filters.priceOrder ? `&priceOrder=${filters.priceOrder}` : '',
-      getDisabled: filters.getDisabled ? `&getDisabled=${filters.getDisabled}`  : ''
+  getAll(filters?: IGetAllFilter): Observable<IResponse> {
+    let queryFilters = {};
+    if(filters) {
+      const {getDisabled, ...rest} = filters;
+      queryFilters = {
+        enabled: !getDisabled,
+        ...rest
+      }
     }
-    const queryString = `${name}${category}${minPrice}${maxPrice}${getDisabled}${dateOrder}${priceOrder}`
-    return this._http.get<IResponse>(`${this._url}?${queryString}`)
+    return this._http.post<IResponse>(`${this._url}/all`, queryFilters, this._httpOptions)
   }
 
   getById(productId: number): Observable<IResponse> {
@@ -48,13 +46,12 @@ export class ProductService {
   }
 
   add(product: any): Observable<IResponse> {
-    console.log(product)
     return this._http.post<IResponse>(`${this._url}`, product, this._httpOptions);
   }
   
   update(product: any) {
     const {id, ...rest} = product as IProduct;
-    return this._http.put<IResponse>(`${this._url}/${id}`, {...rest}, this._httpOptions);
+    return this._http.patch<IResponse>(`${this._url}/${id}`, {...rest}, this._httpOptions);
   }
 
   delete(productId: number): Observable<IResponse> {
